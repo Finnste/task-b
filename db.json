@@ -1,0 +1,11 @@
+{
+    "users": [
+        {
+            "name": "Finn",
+            "email": "hello@finn-steffens.de",
+            "telephone": "07882928179",
+            "dob": "24.10.2023",
+            "address": "London"
+        }
+    ]
+}
