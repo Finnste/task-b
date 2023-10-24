@@ -3,14 +3,34 @@ import "../styles/Field.css";
 
 const Field = (props) => {
   const [inputError, setInputError] = useState(false);
+  const [inputType, setinputType] = useState("");
 
   const checkInput = (e) => {
     let hasNumber = /\d/;
-    if (hasNumber.test(e.target.value)) {
-      console.log("Number!");
-      setInputError(true);
-    } else {
-      setInputError(false);
+    let hasLetter = /[a-zA-Z]/;
+    const i = e.target.value;
+
+    // check if name is valid
+    if (props.title === "Name") {
+      if (hasNumber.test(i)) {
+        setInputError(true);
+      } else {
+        setInputError(false);
+      }
+    }
+    // check if email address is valid
+    else if (props.title === "Email Address") {
+      if (e.target.validity.valid) {
+        setInputError(false);
+      } else {
+        setInputError(true);
+      }
+    } else if (props.title === "Phone Number") {
+      if (hasLetter.test(i)) {
+        setInputError(true);
+      } else {
+        setInputError(false);
+      }
     }
   };
 
@@ -21,13 +41,14 @@ const Field = (props) => {
         <input
           onChange={checkInput}
           className={inputError ? "input error" : "input"}
-          type="text"
+          type={props.inputType}
           placeholder={props.title}
+          required
         />
-        <label className={inputError ? "alertHidden alert" : "alertHidden"}>
-          Wrong Format
-        </label>
       </form>
+      <label className={inputError ? "alertHidden alert" : "alertHidden"}>
+        Please enter a valid {props.title}
+      </label>
     </div>
   );
 };
