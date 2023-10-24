@@ -24,6 +24,22 @@ const Form = () => {
 
   const handleSave = (formValues) => {
     console.log(formValues);
+
+    fetch("https://my-json-server.typicode.com/finnste/task-b/users", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Content-Type: "application/json",
+      },
+      body: JSON.stringify({
+        name: 'test',
+        email: 'hfhfhhdhdhd@abcb.com'
+      }),
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(JSON.stringify(responseData));
+      });
   };
 
   return (
@@ -32,21 +48,30 @@ const Form = () => {
       <form onSubmit={handleSubmit(handleSave)}>
         <div className="fieldContainer">
           <p>Name</p>
-          <input type="text" {...register("name")} placeholder="Name" className={errors.name? "input inputError": "input"}/>
-          <div className="alert">
-            {errors.name?.message}
-          </div>
+          <input
+            type="text"
+            {...register("name")}
+            placeholder="Name"
+            className={errors.name ? "input inputError" : "input"}
+          />
+          <div className="alert">{errors.name?.message}</div>
         </div>
 
         <div className="fieldContainer">
           <p>Email Adress</p>
-          <input type="email" {...register("email")} placeholder="Email" className={errors.email? "input inputError": "input"}/>
-          <div className="alert">
-            {errors.email?.message}
-          </div>
+          <input
+            type="email"
+            {...register("email")}
+            placeholder="Email"
+            className={errors.email ? "input inputError" : "input"}
+          />
+          <div className="alert">{errors.email?.message}</div>
         </div>
 
-        <button className={errors? "submitButton buttonError": "submitButton"} type="submit">
+        <button
+          className={errors ? "submitButton buttonError" : "submitButton"}
+          type="submit"
+        >
           Submit!
         </button>
       </form>
