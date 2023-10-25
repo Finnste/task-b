@@ -20,25 +20,27 @@ const Form = () => {
   });
   const { errors } = formState;
 
-  const [inputError, setInputError] = useState(true);
+  const [success, setSuccess] = useState(false);
 
   const handleSave = (formValues) => {
     console.log(formValues);
 
-    fetch("https://my-json-server.typicode.com/finnste/task-b/users", {
+    fetch("https://d21af321-6b82-426d-99e7-fbb4ac7aed40.mock.pstmn.io/users", {
       method: "POST",
       headers: {
-        Accept: "application/json",
-        Content-Type: "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: 'test',
-        email: 'hfhfhhdhdhd@abcb.com'
+        name: "Finn",
+        email: "hello@finn-steffens.de",
       }),
     })
       .then((response) => response.json())
       .then((responseData) => {
         console.log(JSON.stringify(responseData));
+        if (responseData.Success === "true") {
+          setSuccess(true);
+        }
       });
   };
 
@@ -75,6 +77,9 @@ const Form = () => {
           Submit!
         </button>
       </form>
+      <div className={success ? "modal hideModal" : "modal"}>
+        The user has been successfully created!
+      </div>
     </div>
   );
 };
