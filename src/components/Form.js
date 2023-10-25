@@ -22,9 +22,10 @@ const Form = () => {
 
   // variable to control if the submission and server response is successfull
   const [success, setSuccess] = useState(false);
+    // variable to control success message modal 
   const [modalText, setModalText] = useState("");
 
-  // function executed when form is submitted
+  // POST data to postman mock server
   const handleSave = (formValues) => {
     console.log(formValues);
     fetch("https://d21af321-6b82-426d-99e7-fbb4ac7aed40.mock.pstmn.io/users", {
